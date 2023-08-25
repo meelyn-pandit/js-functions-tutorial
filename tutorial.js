@@ -118,3 +118,141 @@ function doSomething2() {
 doSomething2()
 
 /**9. Closures */
+// closure - basically an inner function that can access the outer function defined variables
+// -- can be accessed by statements in the outer function
+// -- outer function cannot access the arguments and variables in the inner function
+function outer(x) {
+    function inner(y) {
+        return x + y
+    }
+    return inner 
+}
+const outerReturn = outer(10) // basically creating a new function that will take 10 as the default value of x
+console.log(outerReturn)
+outerReturn
+console.log(outerReturn(2))
+// find more info about closures
+
+/**10. Callback functions */
+// call the function back at some point in tim
+// in js function is a first class citizen, can pass a function as a parameter into another function
+// let itsNight = true
+// let isDinksOverCheckOnLine = false
+// function bar(){
+//     console.log('bar')
+// }
+// function foo(bar) {
+//     bar();
+// }
+
+// function foo(bar) {
+// 	bar();
+// }
+
+// foo()
+// // callback functions in nodejs are different than just vanilla js
+// function named() {
+//     console.log('bar')
+// }
+
+// foo(named)
+
+// function foo(bar) {
+// 	if(itsNight) {
+//   bar();
+//   }
+//   if(isDrinksOverCheckOnline){
+//   bar()
+//   }
+// }
+// none of the above works in nodejs, copy/paste it in jsfiddle.net to see how it works
+// basically callback functiosn take a function as an argument.
+
+/**11. High Order Functions (HOF) */
+// HOF takes one or more functions as an argument
+// -- it may return a function
+// -- relationship between HOF and callback function
+// -- callbacks do not necessarily return a function
+// HOF can return a function
+
+function getCapture(camera) { // example of a HOF because it returns a function
+    camera()
+}
+
+getCapture(function() {
+    console.log('Canon')
+})
+
+function returnFn() {
+    return function() {
+        console.log('returning')
+    }
+}
+
+const fn = returnFn()
+fn()
+// array functions are HOF
+let array = [1,2,3]
+const array_mod = array.filter((elem) => elem > 1)
+console.log(array_mod)
+
+/**12. Pure Functions */
+// pure function produces the same output for the same input
+// predictable
+
+// function sayGreeting(name) { // initial function definition
+//     return `Hello ${name}`
+// }
+console.log(sayGreeting('Tapas'))
+
+// let greeting = "hello"; // initial greeting declaration
+
+function sayGreeting(name) {
+    let greeting = 'hola'
+
+    return `${greeting} ${name}`
+}
+console.log(sayGreeting('Tapas'))
+
+// side effect - variable otuside of the scope of the function
+// -- causes function to no longer produce the same output for the same input
+
+/**13. Immediately Invoked Function Expression (IIFE) */
+// code in the function is immediately executed when it is defined
+// (function () {
+//     console.log('iife function')
+// })() // this function runs immediately after declaration, but does not seem to work in node...
+
+/**14. Function Execution Stack (1st step in call stack)*/
+// call stack and function execution stack can be the same (reverse in picture format)
+
+/**15. Recursion */
+// a function that refers or calls itself
+function foo3() {
+    console.log('foo')
+    foo3() // it is suppose to constantly console log foo until you get the "max call stack size exceeded"
+}
+
+const foo4 = function buz() { // example of recursion because you are referring to the foo function with foo or buz
+    foo4()
+}
+
+// whenever you use recursion you need to have a base condition or a condition when you stop the recursion
+
+// function recurse() {
+//     if(base_condition) {
+//         // do something
+//         return
+//     }
+//     recurse()
+// }
+// let count = 100 // already declared further up in file
+function fetchWater(count) { // similar to a for loop
+    if (count === 0) {
+        console.log('No more Water left!')
+        return
+    }
+    console.log('Fetching water...', count)
+    fetchWater(count -1)
+}
+fetchWater(100) // always remember to call the function!
