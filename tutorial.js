@@ -73,6 +73,7 @@ const add = (x,y) => x + y // don't need curly brackets or return function
 console.log('arrow function add', add(2,4))
 
 /** 7. Nested Functions */
+// define a function within a function
 // closure in functions = understanding of nested functions + function scope
 function outer() {
     console.log('outer')
@@ -83,3 +84,37 @@ function outer() {
 }
 
 outer()
+
+/** 8. Function Scope */
+// define who can access what variables
+// variables defined within the function cannot be accessed outside the function
+// variables defined in the scope of the function (global variables) can be accessed by the function
+// for nested functions:
+// -- outer function cannot access variables defined within inner function, while inner functions can access the outer function variables
+// -- (the scope it is defined in)
+
+function doSomething() {
+    let x = 10
+    const y = 20
+    var z = 30
+
+    console.log(x,y,z)
+}
+
+doSomething()
+
+// console.log(x)
+// console.log(y)
+// console.log(z) // cannot access z outside of the doSomething() function
+
+let x2 = 10
+var y2 = 20
+let z = 30
+
+function doSomething2() {
+    console.log(x2, y2, z)
+}
+
+doSomething2()
+
+/**9. Closures */
